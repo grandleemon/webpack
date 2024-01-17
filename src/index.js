@@ -1,3 +1,4 @@
-import {test} from "./test";
+import { test } from "./test";
 
-console.log("hello world")
+console.log("hello world");
+test(2, 2);

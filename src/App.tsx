@@ -1,8 +1,8 @@
-import "./App.scss"
+import styles from "./App.module.scss";
 
 export const App = () => {
 	return (
-		<div>
+		<div className={styles.test}>
 			hello world
 		</div>
 	);

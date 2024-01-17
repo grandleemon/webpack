@@ -1,5 +1,5 @@
 import path from "path";
-import type { BuildMode, BuildPlatform } from "./config/build/types/types";
+import type { BuildMode, BuildPaths, BuildPlatform } from "./config/build/types/types";
 import { buildWebpack } from "./config/build/buildWebpack";
 
 
@@ -11,12 +11,11 @@ interface EnvVariables {
 }
 
 export default (env: EnvVariables) => {
-	const isDev = env.mode === "development";
-
-	const paths = {
+	const paths: BuildPaths = {
 		html: path.resolve(__dirname, "public", "index.html"),
 		output: path.resolve(__dirname, "build"),
 		entry: path.resolve(__dirname, "src", "index.tsx"),
+		public: path.resolve(__dirname, "public"),
 		src: path.resolve(__dirname, "src")
 	};
 

@@ -4,8 +4,13 @@ import About from "@/pages/about/About";
 import Img1 from "@/assets/genetic-data-svgrepo-com.svg";
 
 export const App = () => {
+	if (__PLATFORM__ === "desktop") {
+		return <div>desktop</div>;
+	}
+
 	return (
 		<div className={styles.test}>
+			PLATFORM - {__PLATFORM__}
 			<Img1 style={{ color: "green" }} width={50} height={50}/>
 			<Link to="/about">About</Link>
 			<Link to="/shop">Shop</Link>

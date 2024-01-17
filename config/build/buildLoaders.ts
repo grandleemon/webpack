@@ -21,8 +21,15 @@ export const buildLoaders = ({ mode }: BuildOptions): ModuleOptions["rules"] => 
 
 	const tsLoader = {
 		test: /\.tsx?$/,
-		use: "ts-loader",
-		exclude: /node_modules/,
+		use: [
+			{
+				loader: "ts-loader",
+				options: {
+					transpileOnly: isDev
+				},
+			}
+		],
+		exclude: /node_modules/
 	};
 
 	const assetLoader = {

@@ -4,10 +4,6 @@ import About from "@/pages/about/About";
 import Img1 from "@/assets/genetic-data-svgrepo-com.svg";
 
 export const App = () => {
-	if (__PLATFORM__ === "desktop") {
-		return <div>desktop</div>;
-	}
-
 	return (
 		<div className={styles.test}>
 			PLATFORM - {__PLATFORM__}

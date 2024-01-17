@@ -7,7 +7,7 @@ export const App = () => {
 	return (
 		<div className={styles.test}>
 			PLATFORM - {__PLATFORM__}
-			<Img1 style={{ color: "green" }} width={50} height={50}/>
+			<Img1 style={{ color: "blue" }} width={50} height={50}/>
 			<Link to="/about">About</Link>
 			<Link to="/shop">Shop</Link>
 			hello world

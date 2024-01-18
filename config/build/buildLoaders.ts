@@ -2,9 +2,10 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import { ModuleOptions } from "webpack";
 import ReactRefreshTypescript from "react-refresh-typescript";
 import type { BuildOptions } from "./types/types";
+import { buildBabelLoader } from "./babel/buildBabelLoader";
 
-export const buildLoaders = ({ mode }: BuildOptions): ModuleOptions["rules"] => {
-	const isDev = mode === "development";
+export const buildLoaders = (options: BuildOptions): ModuleOptions["rules"] => {
+	const isDev = options.mode === "development";
 
 	const cssLoaderWithModules = {
 		loader: "css-loader",
@@ -20,21 +21,21 @@ export const buildLoaders = ({ mode }: BuildOptions): ModuleOptions["rules"] => 
 		use: [isDev ? "style-loader" : MiniCssExtractPlugin.loader, cssLoaderWithModules, "sass-loader"],
 	};
 
-	const tsLoader = {
-		test: /\.tsx?$/,
-		use: [
-			{
-				loader: "ts-loader",
-				options: {
-					transpileOnly: isDev,
-					getCustomTransformers: () => ({
-						before: [isDev && ReactRefreshTypescript()].filter(Boolean)
-					})
-				},
-			}
-		],
-		exclude: /node_modules/
-	};
+	// const tsLoader = {
+	// 	test: /\.tsx?$/,
+	// 	use: [
+	// 		{
+	// 			loader: "ts-loader",
+	// 			options: {
+	// 				transpileOnly: isDev,
+	// 				getCustomTransformers: () => ({
+	// 					before: [isDev && ReactRefreshTypescript()].filter(Boolean)
+	// 				})
+	// 			},
+	// 		}
+	// 	],
+	// 	exclude: /node_modules/
+	// };
 
 	const assetLoader = {
 		test: /\.(png|jpg|jpeg|gif)$/i,
@@ -57,9 +58,12 @@ export const buildLoaders = ({ mode }: BuildOptions): ModuleOptions["rules"] => 
 		}],
 	};
 
+	const babelLoader = buildBabelLoader(options);
+
 	return [
 		scssLoader,
-		tsLoader,
+		// tsLoader,
+		babelLoader,
 		assetLoader,
 		svgrLoader
 	];
